@@ -1,0 +1,2 @@
+# littleNews
+Bit sized news 
