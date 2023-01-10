@@ -7,21 +7,25 @@ function ScrapPage() {
     const [newsData, setNewsData] = useState(null);
 
     useEffect(() => {
-       const scrapWeb = async(req, res)=>{
-
-        let response = await fetch('https://littlenews-api.onrender.com/news/scrap',{
-          headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           }});
-        let json = await response.json();
+     
+        try {
+            const scrapWeb = async(req, res)=>{ 
+              let response = await fetch('https://littlenews-api.onrender.com/news/scrap',{
+                  headers : { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  }});
+                let json = await response.json();
         
-        if(response.ok){
-           setNewsData(json);
-        }
+                if(response.ok){
+                  setNewsData(json);
+                }
 
-       }
-       scrapWeb();
+              }
+              scrapWeb();
+        } catch (error) {
+            console.log(error.message);
+        }
     }, [])
     
 

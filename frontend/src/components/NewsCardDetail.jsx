@@ -10,15 +10,18 @@ function NewsCardDetail() {
 
     useEffect(() => {
         const getNewsDetail = async()=>{
-
-            let response = await fetch(`https://littlenews-api.onrender.com/news/${id}`);
-            let json = await response.json();
-            if(response.ok){
-                setNewsItem(json);
-            }
+            try {
+                 let response = await fetch(`https://littlenews-api.onrender.com/news/${id}`);
+                let json = await response.json();
+                if(response.ok){
+                    setNewsItem(json);
+                }
             else{
                 console.log(`error`)
             }
+            } catch (error) {
+                console.log(error.message)
+            }   
         }
      
         if(id){

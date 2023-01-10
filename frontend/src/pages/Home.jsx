@@ -6,19 +6,23 @@ function Home() {
     const [news, setNews] = useState(null);
 
     useEffect(() => {
-        const fetchNews = async ()=>{
-            const response = await fetch('https://littlenews-api.onrender.com/news', {
+          try {
+             const fetchNews = async ()=>{
+               const response = await fetch('https://littlenews-api.onrender.com/news', {
                 headers : { 
                   'Content-Type': 'application/json',
                   'Accept': 'application/json'
                  }});
-            const json = await response.json();
+                  const json = await response.json();
 
-            if(response.ok){
-                setNews(json);
-            }
-        }
-        fetchNews();
+                  if(response.ok){
+                      setNews(json);
+                  }
+              }
+            fetchNews();
+          } catch (error) {
+            console.log(error.message)
+          }
     }, [])
     
 

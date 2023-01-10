@@ -12,7 +12,6 @@ const scrapNews = async(req, res, next)=>{
         ignoreDefaultArgs: ['--disable-extensions'],
         args: [
           '--no-sandbox',
-          '--disable-gpu',
         ]
     });
     const page = await browser.newPage();
@@ -103,7 +102,6 @@ const scrapSingleNews = async(req, res, next)=>{
         ignoreDefaultArgs: ['--disable-extensions'],
         args: [
           '--no-sandbox',
-          '--disable-gpu',
         ]
     });
       const page = await browser.newPage();
