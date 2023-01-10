@@ -1,13 +1,12 @@
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const schedule = require('node-schedule');
 const News = require('../models/newsModel');
 const mongoose = require('mongoose');
 
 // scrap news 
 const scrapNews = async(req, res, next)=>{
-
-    const browser = await puppeteer.launch({defaultViewport: null});
+  try {
+      const browser = await puppeteer.launch({defaultViewport: null});
     const page = await browser.newPage();
     const newsContent = [];
 
@@ -62,12 +61,16 @@ const scrapNews = async(req, res, next)=>{
     
     //Respond with scrapped data 
     res.status(200).json(newsContent);
+  } catch (error) {
+    console.log(error.message)
+  }
+  
   }
 
   // scrap news 
 const scrapSingleNews = async(req, res, next)=>{
-
-//Get news id from url param 
+  try {
+    //Get news id from url param 
   const {id} = req.params;
 //   check to see if it is a valid id type
       if(!mongoose.Types.ObjectId.isValid(id)){
@@ -113,12 +116,10 @@ const scrapSingleNews = async(req, res, next)=>{
   
   //Respond with scrapped data 
   res.status(200).json({title: title, body: body, image: image, detailLink: detailLink, createdAt: createdAt, id: singleNews._id});
-}
-  
+  } catch (error) {
+    console.log(error.message)
+  }
 
-//   schedule.scheduleJob('42 * * * *', function(){
-//     console.log('News crawler started');
-//     scrapNews();
-//   });
+}
 
   module.exports = {scrapNews, scrapSingleNews}
