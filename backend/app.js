@@ -4,27 +4,25 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
-
+var app = express();
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+
 
 var allowedOrigins = ['http://localhost:3001','https://littlenews.onrender.com'];
 app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin 
-    // (like mobile apps or curl requests)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+  origin: (origin, callback)=>{
+    if(allowedOrigins.indexOf(origin) !== -1 || !origin){
+        callback(null, true)
     }
-    return callback(null, true);
-  }
+    else{
+        callback(new Error('Not allowed by CORS policy'))
+    }
+  },
+  optionsSuccessStatus: 200
 }));
 
 app.use(logger('dev'));
@@ -43,5 +41,16 @@ app.get('/', (req, res)=>{
 })
 app.use('/news', indexRouter);
 app.use('/users', usersRouter);
+
+app.all('*', (req, res) => {
+    res.status(404)
+    if (req.accepts('html')) {
+        res.sendFile(path.join(__dirname, 'views', '404.html'))
+    } else if (req.accepts('json')) {
+        res.json({ message: '404 Not Found' })
+    } else {
+        res.type('txt').send('404 Not Found')
+    }
+})
 
 module.exports = app;
