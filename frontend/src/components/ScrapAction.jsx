@@ -3,7 +3,7 @@ import React from 'react'
 function ScrapAction({item}) {
 
     const saveNews = async()=>{
-      let result = await fetch('/news/create',{
+      let result = await fetch('https://littlenews-api.onrender.com/news/create',{
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({

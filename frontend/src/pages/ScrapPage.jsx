@@ -9,7 +9,11 @@ function ScrapPage() {
     useEffect(() => {
        const scrapWeb = async(req, res)=>{
 
-        let response = await fetch('/news/scrap');
+        let response = await fetch('https://littlenews-api.onrender.com/news/scrap',{
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }});
         let json = await response.json();
         
         if(response.ok){
