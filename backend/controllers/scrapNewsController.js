@@ -6,7 +6,14 @@ const mongoose = require('mongoose');
 // scrap news 
 const scrapNews = async(req, res, next)=>{
   try {
-      const browser = await puppeteer.launch({defaultViewport: null});
+      const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: [
+          '--no-sandbox',
+          '--disable-gpu',
+        ]
+    });
     const page = await browser.newPage();
     const newsContent = [];
 
@@ -89,7 +96,14 @@ const scrapSingleNews = async(req, res, next)=>{
        const newsLink = singleNews.detailLink;
 
     // Launch puppeteer 
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: [
+          '--no-sandbox',
+          '--disable-gpu',
+        ]
+    });
       const page = await browser.newPage();
 
       // Open the news item URL  
