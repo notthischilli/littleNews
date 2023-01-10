@@ -6,7 +6,9 @@ const cors = require('cors');
 require('dotenv').config();
 var app = express();
 const mongoose = require('mongoose');
-
+mongoose.connect(process.env.MONGO_URI)
+.then(()=>{console.log(`connection to DB established`)})
+.catch(err=>{console.log(err)})
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -32,9 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-mongoose.connect(process.env.MONGO_URI)
-.then(()=>{console.log(`connection to DB established`)})
-.catch(err=>{console.log(err)})
+
 
 app.get('/', (req, res)=>{
     res.redirect('/news')
