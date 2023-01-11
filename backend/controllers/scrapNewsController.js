@@ -9,7 +9,6 @@ const scrapNews = async(req, res, next)=>{
       const browser = await puppeteer.launch({
         headless: true,
         executablePath: '/usr/bin/chromium-browser',
-        ignoreDefaultArgs: ['--disable-extensions'],
         args: [
           '--no-sandbox',
         ]
@@ -99,7 +98,6 @@ const scrapSingleNews = async(req, res, next)=>{
       const browser = await puppeteer.launch({
         headless: true,
         executablePath: '/usr/bin/chromium-browser',
-        ignoreDefaultArgs: ['--disable-extensions'],
         args: [
           '--no-sandbox',
         ]
