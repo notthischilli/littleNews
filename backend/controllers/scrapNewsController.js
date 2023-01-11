@@ -10,7 +10,7 @@ const scrapNews = async(req, res, next)=>{
       args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
-      headless: true,
+      headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
@@ -99,7 +99,7 @@ const scrapSingleNews = async(req, res, next)=>{
       args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
-      headless: true,
+      headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
       const page = await browser.newPage();
