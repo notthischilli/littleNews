@@ -1,5 +1,4 @@
 const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
 const cheerio = require('cheerio');
 const News = require('../models/newsModel');
 const mongoose = require('mongoose');
