@@ -9,6 +9,7 @@ const scrapNews = async(req, res, next)=>{
       const browser = await puppeteer.launch({
         skipDownload: true,
         headless: true,
+        executablePath: 'backend\.cache\puppeteer\chrome\win64-1069273\chrome-win\chrome.exe',
         args: ['--no-sandbox'], 
     });
     const page = await browser.newPage();
@@ -96,6 +97,7 @@ const scrapSingleNews = async(req, res, next)=>{
       const browser = await puppeteer.launch({
         skipDownload: true,
         headless: true,
+        executablePath: 'backend\.cache\puppeteer\chrome\win64-1069273\chrome-win\chrome.exe',
         args: ['--no-sandbox'], 
     });
       const page = await browser.newPage();
