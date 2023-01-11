@@ -7,11 +7,10 @@ const mongoose = require('mongoose');
 const scrapNews = async(req, res, next)=>{
   try {
       const browser = await puppeteer.launch({
+        skipDownload: true,
         headless: true,
-        executablePath: '/usr/bin/chromium',
-        args: [
-          '--no-sandbox',
-        ]
+        executablePath: '/usr/bin/chromium-browser',
+        args: ['--no-sandbox'], 
     });
     const page = await browser.newPage();
     const newsContent = [];
@@ -96,11 +95,10 @@ const scrapSingleNews = async(req, res, next)=>{
 
     // Launch puppeteer 
       const browser = await puppeteer.launch({
+        skipDownload: true,
         headless: true,
-        executablePath: '/usr/bin/chromium',
-        args: [
-          '--no-sandbox',
-        ]
+        executablePath: '/usr/bin/chromium-browser',
+        args: ['--no-sandbox'], 
     });
       const page = await browser.newPage();
 
