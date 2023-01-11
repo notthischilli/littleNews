@@ -8,7 +8,7 @@ function Home() {
     useEffect(() => {
           try {
              const fetchNews = async ()=>{
-               const response = await fetch('https://littlenews-api.onrender.com/news', {
+               const response = await fetch('http://localhost:3000/news', {
                 headers : { 
                   'Content-Type': 'application/json',
                   'Accept': 'application/json'
