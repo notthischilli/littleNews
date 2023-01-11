@@ -16,7 +16,7 @@ var usersRouter = require('./routes/users');
 
 
 
-var allowedOrigins = ['http://localhost:3000/','https://littlenews.onrender.com','https://littlenews.onrender.com/news/scrap','https://littlenews.onrender.com/scrap'];
+var allowedOrigins = ['https://littlenews.onrender.com','https://littlenews.onrender.com/news/scrap','https://littlenews.onrender.com/scrap'];
 app.use(cors({
   origin: (origin, callback)=>{
     if(allowedOrigins.indexOf(origin) !== -1 || !origin){
