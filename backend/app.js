@@ -5,7 +5,9 @@ var logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
 var app = express();
+
 const mongoose = require('mongoose');
+
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{console.log(`connection to DB established`)})
 .catch(err=>{console.log(err)})
@@ -14,7 +16,7 @@ var usersRouter = require('./routes/users');
 
 
 
-var allowedOrigins = ['https://littlenews.onrender.com','https://littlenews-api.onrender.com/news/scrap'];
+var allowedOrigins = ['https://littlenews.onrender.com','https://littlenews-api.onrender.com/news/scrap','https://littlenews.onrender.com/scrap'];
 app.use(cors({
   origin: (origin, callback)=>{
     if(allowedOrigins.indexOf(origin) !== -1 || !origin){

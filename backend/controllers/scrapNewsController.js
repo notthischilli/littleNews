@@ -1,5 +1,5 @@
 const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cheerio = require('cheerio');
 const News = require('../models/newsModel');
 const mongoose = require('mongoose');
@@ -7,11 +7,12 @@ const mongoose = require('mongoose');
 // scrap news 
 const scrapNews = async(req, res, next)=>{
   try {
-      const browser = await chromium.puppeteer.launch({
-        skipDownload: true,
-        headless: true,
-        executablePath: await chromium.executablePath,
-        args: ['--no-sandbox'], 
+    const browser = await chromium.puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: true,
+      ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
     const newsContent = [];
@@ -95,11 +96,12 @@ const scrapSingleNews = async(req, res, next)=>{
        const newsLink = singleNews.detailLink;
 
     // Launch puppeteer 
-      const browser = await chromium.puppeteer.launch({
-        skipDownload: true,
-        headless: true,
-        executablePath: await chromium.executablePath,
-        args: ['--no-sandbox'], 
+    const browser = await chromium.puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: true,
+      ignoreHTTPSErrors: true,
     });
       const page = await browser.newPage();
 
