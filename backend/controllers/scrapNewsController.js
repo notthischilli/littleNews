@@ -1,3 +1,4 @@
+const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 const News = require('../models/newsModel');
@@ -6,10 +7,10 @@ const mongoose = require('mongoose');
 // scrap news 
 const scrapNews = async(req, res, next)=>{
   try {
-      const browser = await puppeteer.launch({
+      const browser = await chromium.puppeteer.launch({
         skipDownload: true,
         headless: true,
-        executablePath: 'backend\.cache\puppeteer\chrome\win64-1069273\chrome-win\chrome.exe',
+        executablePath: await chromium.executablePath,
         args: ['--no-sandbox'], 
     });
     const page = await browser.newPage();
@@ -94,10 +95,10 @@ const scrapSingleNews = async(req, res, next)=>{
        const newsLink = singleNews.detailLink;
 
     // Launch puppeteer 
-      const browser = await puppeteer.launch({
+      const browser = await chromium.puppeteer.launch({
         skipDownload: true,
         headless: true,
-        executablePath: 'backend\.cache\puppeteer\chrome\win64-1069273\chrome-win\chrome.exe',
+        executablePath: await chromium.executablePath,
         args: ['--no-sandbox'], 
     });
       const page = await browser.newPage();
