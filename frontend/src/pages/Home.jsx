@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import NewsCardList from '../components/NewsCardList'
+import Spinner from '../components/Spinner';
 
 function Home() {
 
@@ -28,7 +29,7 @@ function Home() {
 
   return (
     <div>
-        {news && <NewsCardList news={news} />}
+        {news ? <NewsCardList news={news}/> : <Spinner/>}
     </div>
   )
 }
